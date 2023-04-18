@@ -21,7 +21,6 @@ func main() {
 
 		if islem == 1 {
 			fmt.Println("Çekilecek Tutar Giriniz:")
-
 			var cekilecek_tutar int
 			fmt.Scanln(&cekilecek_tutar)
 
@@ -34,10 +33,11 @@ func main() {
 			}
 		} else if islem == 2 {
 			fmt.Println("Yatırılacak Tutarı Giriniz: ")
-
 			var yatırılacak_tutar int
 			fmt.Scanln(&yatırılacak_tutar)
+			
 			bakiye += yatırılacak_tutar
+			
 			fmt.Println("Yeni Bakiye: ", bakiye)
 		} else if islem == 3 {
 			fmt.Println("Hesap Bakiyeniz: ", bakiye)
