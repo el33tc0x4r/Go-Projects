@@ -6,21 +6,21 @@ import (
 	"strings"
 )
 
-type BitcoinBlock struct {
+type BlockchainBlock struct {
 	previous_block_hash string
 	transaction_list    []string
 	block_data          string
 	block_hash          string
 }
 
-func NewBitcoinBlock(previous_block_hash string, transaction_list []string) *BitcoinBlock {
+func NewBlockchainBlock(previous_block_hash string, transaction_list []string) *BlockchainBlock {
 	block_data := strings.Join(transaction_list, "-") + " - " + previous_block_hash
 	block_hash := fmt.Sprintf("%x", sha256.Sum256([]byte(block_data)))
 	return &BitcoinBlock{previous_block_hash, transaction_list, block_data, block_hash}
 }
 
 type Blockchain struct {
-	chain []*BitcoinBlock
+	chain []*BlockchainBlock
 }
 
 func NewBlockchain() *Blockchain {
@@ -30,12 +30,12 @@ func NewBlockchain() *Blockchain {
 }
 
 func (bc *Blockchain) generate_genesis_block() {
-	bc.chain = append(bc.chain, NewBitcoinBlock("0", []string{"Genesis Block"}))
+	bc.chain = append(bc.chain, NewBlockchainBlock("0", []string{"Genesis Block"}))
 }
 
 func (bc *Blockchain) create_block_from_transaction(transaction_list []string) {
 	previous_block_hash := bc.last_block().block_hash
-	bc.chain = append(bc.chain, NewBitcoinBlock(previous_block_hash, transaction_list))
+	bc.chain = append(bc.chain, NewBlockchainBlock(previous_block_hash, transaction_list))
 }
 
 func (bc *Blockchain) display_chain() {
@@ -46,7 +46,7 @@ func (bc *Blockchain) display_chain() {
 	}
 }
 
-func (bc *Blockchain) last_block() *BitcoinBlock {
+func (bc *Blockchain) last_block() *BlockchainBlock {
 	return bc.chain[len(bc.chain)-1]
 }
 
